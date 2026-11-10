@@ -1,0 +1,32 @@
+{
+	"schemaVersion": 1,
+	"id": "areatools",
+	"version": "${version}",
+	"name": "Area Tools",
+	"description": "Martillos y excavadores de cinco materiales que rompen un área de 3x3 (o 3x3x3 en modo profundo): agáchate y haz clic derecho para cambiar de modo. Configurable en config/areatools.json.",
+	"authors": [
+		"AlexF6"
+	],
+	"contact": {
+		"homepage": "https://github.com/AlexF6/areatools",
+		"sources": "https://github.com/AlexF6/areatools",
+		"issues": "https://github.com/AlexF6/areatools/issues"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/areatools/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"io.github.alexf6.areatools.AreaToolsMod"
+		],
+		"client": [
+			"io.github.alexf6.areatools.client.AreaToolsClient"
+		]
+	},
+	"depends": {
+		"fabricloader": ">=0.19.5",
+		"minecraft": "~26.3",
+		"java": ">=25",
+		"fabric-api": "*"
+	}
+}
