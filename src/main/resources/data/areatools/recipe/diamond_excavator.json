@@ -1,0 +1,17 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"category": "equipment",
+	"pattern": [
+		" B ",
+		"BSB",
+		" S "
+	],
+	"key": {
+		"B": "minecraft:diamond_block",
+		"S": "minecraft:stick"
+	},
+	"result": {
+		"id": "areatools:diamond_excavator",
+		"count": 1
+	}
+}

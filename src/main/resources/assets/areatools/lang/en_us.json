@@ -1,0 +1,22 @@
+{
+	"item.areatools.copper_hammer": "Copper Hammer",
+	"item.areatools.iron_hammer": "Iron Hammer",
+	"item.areatools.golden_hammer": "Golden Hammer",
+	"item.areatools.diamond_hammer": "Diamond Hammer",
+	"item.areatools.netherite_hammer": "Netherite Hammer",
+	"item.areatools.copper_excavator": "Copper Excavator",
+	"item.areatools.iron_excavator": "Iron Excavator",
+	"item.areatools.golden_excavator": "Golden Excavator",
+	"item.areatools.diamond_excavator": "Diamond Excavator",
+	"item.areatools.netherite_excavator": "Netherite Excavator",
+	"areatools.tooltip.mode": "Mode: %s",
+	"areatools.mode.flat": "Flat",
+	"areatools.mode.wide": "Wide",
+	"areatools.mode.deep": "Deep",
+	"advancements.areatools.hammer.title": "Heavy Hitter",
+	"advancements.areatools.hammer.description": "Obtain a hammer, which mines a 3x3 area",
+	"advancements.areatools.excavator.title": "Dig Deep",
+	"advancements.areatools.excavator.description": "Obtain an excavator, the shovel version of the hammer",
+	"advancements.areatools.netherite_hammer.title": "Smash Everything",
+	"advancements.areatools.netherite_hammer.description": "Obtain a Netherite Hammer"
+}

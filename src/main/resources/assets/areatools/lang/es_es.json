@@ -1,0 +1,22 @@
+{
+	"item.areatools.copper_hammer": "Martillo de cobre",
+	"item.areatools.iron_hammer": "Martillo de hierro",
+	"item.areatools.golden_hammer": "Martillo de oro",
+	"item.areatools.diamond_hammer": "Martillo de diamante",
+	"item.areatools.netherite_hammer": "Martillo de netherita",
+	"item.areatools.copper_excavator": "Excavador de cobre",
+	"item.areatools.iron_excavator": "Excavador de hierro",
+	"item.areatools.golden_excavator": "Excavador de oro",
+	"item.areatools.diamond_excavator": "Excavador de diamante",
+	"item.areatools.netherite_excavator": "Excavador de netherita",
+	"areatools.tooltip.mode": "Modo: %s",
+	"areatools.mode.flat": "Plano",
+	"areatools.mode.wide": "Ancho",
+	"areatools.mode.deep": "Profundo",
+	"advancements.areatools.hammer.title": "Golpe pesado",
+	"advancements.areatools.hammer.description": "Consigue un martillo, que mina un área de 3x3",
+	"advancements.areatools.excavator.title": "A cavar hondo",
+	"advancements.areatools.excavator.description": "Consigue un excavador, la versión pala del martillo",
+	"advancements.areatools.netherite_hammer.title": "Machácalo todo",
+	"advancements.areatools.netherite_hammer.description": "Consigue un martillo de netherita"
+}
