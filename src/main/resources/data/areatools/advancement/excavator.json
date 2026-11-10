@@ -1,0 +1,35 @@
+{
+	"parent": "areatools:hammer",
+	"display": {
+		"icon": {
+			"id": "areatools:iron_excavator"
+		},
+		"title": {
+			"translate": "advancements.areatools.excavator.title"
+		},
+		"description": {
+			"translate": "advancements.areatools.excavator.description"
+		},
+		"frame": "task",
+		"show_toast": true,
+		"announce_to_chat": true,
+		"hidden": false
+	},
+	"criteria": {
+		"has_item": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"items": "#areatools:excavators"
+					}
+				]
+			}
+		}
+	},
+	"requirements": [
+		[
+			"has_item"
+		]
+	]
+}

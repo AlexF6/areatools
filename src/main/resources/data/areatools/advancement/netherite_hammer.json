@@ -1,0 +1,35 @@
+{
+	"parent": "areatools:hammer",
+	"display": {
+		"icon": {
+			"id": "areatools:netherite_hammer"
+		},
+		"title": {
+			"translate": "advancements.areatools.netherite_hammer.title"
+		},
+		"description": {
+			"translate": "advancements.areatools.netherite_hammer.description"
+		},
+		"frame": "goal",
+		"show_toast": true,
+		"announce_to_chat": true,
+		"hidden": false
+	},
+	"criteria": {
+		"has_item": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"items": "areatools:netherite_hammer"
+					}
+				]
+			}
+		}
+	},
+	"requirements": [
+		[
+			"has_item"
+		]
+	]
+}

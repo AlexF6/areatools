@@ -1,0 +1,35 @@
+{
+	"parent": "minecraft:story/upgrade_tools",
+	"display": {
+		"icon": {
+			"id": "areatools:iron_hammer"
+		},
+		"title": {
+			"translate": "advancements.areatools.hammer.title"
+		},
+		"description": {
+			"translate": "advancements.areatools.hammer.description"
+		},
+		"frame": "task",
+		"show_toast": true,
+		"announce_to_chat": true,
+		"hidden": false
+	},
+	"criteria": {
+		"has_item": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"items": "#areatools:hammers"
+					}
+				]
+			}
+		}
+	},
+	"requirements": [
+		[
+			"has_item"
+		]
+	]
+}
