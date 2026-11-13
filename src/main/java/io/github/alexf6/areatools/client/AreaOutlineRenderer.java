@@ -8,6 +8,7 @@ import io.github.alexf6.areatools.AreaToolsConfig;
 import io.github.alexf6.areatools.BreakArea;
 import io.github.alexf6.areatools.ModComponents;
 import io.github.alexf6.areatools.ToolKind;
+import io.github.alexf6.areatools.network.SyncedAreaConfig;
 import net.fabricmc.fabric.api.client.rendering.v1.level.LevelRenderContext;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
@@ -20,12 +21,15 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 
-/** Dibuja el contorno de los bloques vecinos que la herramienta romperá; el central lo dibuja el juego. */
+/**
+ * Dibuja el contorno de los bloques vecinos que la herramienta romperá; el central lo dibuja el juego. El tamaño
+ * del área es el que dictó el servidor al conectarse ({@link SyncedAreaConfig}), no el del archivo local.
+ */
 final class AreaOutlineRenderer {
 
     private static final int COLOR = ARGB.colorFromFloat(0.4F, 0.0F, 0.0F, 0.0F); // mismo estilo que el contorno de vanilla
 
-    private final AreaToolsConfig config = AreaToolsConfig.get();
+    private final AreaToolsConfig localConfig = AreaToolsConfig.get();
 
     // Las posiciones solo dependen de dónde se apunta y del tamaño: se recalculan al cambiar, no en cada frame.
     private BlockPos cachedCenter;
@@ -47,7 +51,7 @@ final class AreaOutlineRenderer {
         BlockPos center = hit.getBlockPos();
         if (!kind.isMineable(mc.level.getBlockState(center))) return;
 
-        AreaShape shape = tool.getOrDefault(ModComponents.AREA_MODE, AreaMode.FLAT).shape(config);
+        AreaShape shape = tool.getOrDefault(ModComponents.AREA_MODE, AreaMode.FLAT).shape(SyncedAreaConfig.effective(localConfig));
         List<BlockPos> area = areaFor(center, hit.getDirection(), shape);
 
         Vec3 camera = context.levelState().cameraRenderState.pos;
