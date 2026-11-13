@@ -19,6 +19,7 @@ import net.minecraft.world.phys.Vec3;
 public final class AreaBreaker {
 
     private final List<ItemEntity> spawnedDrops = new ArrayList<>();
+    private Level currentLevel;
     private boolean active;
 
     /** Verdadero mientras se rompen los vecinos: cada uno vuelve a disparar el evento de romper bloque. */
@@ -33,6 +34,7 @@ public final class AreaBreaker {
         AreaShape shape = AreaShape.of(mode, config);
 
         active = true;
+        currentLevel = level;
         try {
             int broken = 0;
             for (BlockPos target : BreakArea.neighbours(center, face, shape)) {
@@ -48,27 +50,35 @@ public final class AreaBreaker {
                     tool.setDamageValue(damageBefore); // solo 1 de cada N bloques gasta durabilidad
                 }
             }
+
+            if (config.centerDrops()) {
+                gatherDrops(center, Math.max(shape.radius(), shape.depth()) + 1.5);
+            }
         } finally {
             active = false;
+            currentLevel = null;
+            spawnedDrops.clear();
         }
-
-        if (config.centerDrops()) gatherDrops(center);
-        spawnedDrops.clear();
     }
 
-    /** Anota los ítems que aparecen mientras se rompe el área. */
+    /** Anota los ítems que aparecen mientras se rompe el área, filtrando por mundo. */
     public void onEntityLoad(Entity entity) {
-        if (active && entity instanceof ItemEntity item) spawnedDrops.add(item);
+        if (active && entity instanceof ItemEntity item && entity.level() == currentLevel) {
+            spawnedDrops.add(item);
+        }
     }
 
     /**
-     * Junta los drops en el bloque central. Aún no ha pasado ningún tick, así que ese bloque ya estará roto
-     * cuando los ítems se muevan por primera vez.
+     * Junta los drops en el bloque central si están cerca del área minada. Aún no ha pasado ningún tick,
+     * así que ese bloque ya estará roto cuando los ítems se muevan por primera vez.
      */
-    private void gatherDrops(BlockPos center) {
+    private void gatherDrops(BlockPos center, double maxDistance) {
         Vec3 middle = Vec3.atCenterOf(center);
+        double maxDistSq = maxDistance * maxDistance;
         for (ItemEntity item : spawnedDrops) {
-            item.setPos(middle.x, middle.y - item.getBbHeight() / 2.0, middle.z);
+            if (item.isAlive() && item.position().distanceToSqr(middle) <= maxDistSq) {
+                item.setPos(middle.x, middle.y - item.getBbHeight() / 2.0, middle.z);
+            }
         }
     }
 }
