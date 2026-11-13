@@ -47,7 +47,7 @@ final class AreaOutlineRenderer {
         BlockPos center = hit.getBlockPos();
         if (!kind.isMineable(mc.level.getBlockState(center))) return;
 
-        AreaShape shape = AreaShape.of(tool.getOrDefault(ModComponents.AREA_MODE, AreaMode.FLAT), config);
+        AreaShape shape = tool.getOrDefault(ModComponents.AREA_MODE, AreaMode.FLAT).shape(config);
         List<BlockPos> area = areaFor(center, hit.getDirection(), shape);
 
         Vec3 camera = context.levelState().cameraRenderState.pos;

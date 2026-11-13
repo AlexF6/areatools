@@ -38,6 +38,15 @@ public enum AreaMode implements StringRepresentable, TooltipProvider {
         return name;
     }
 
+    /** Tamaño del área de este modo con los valores de {@code config}. */
+    public AreaShape shape(AreaToolsConfig config) {
+        return switch (this) {
+            case FLAT -> new AreaShape(config.radius(), 1);
+            case WIDE -> new AreaShape(config.wideRadius(), 1);
+            case DEEP -> new AreaShape(config.radius(), config.deepDepth());
+        };
+    }
+
     public AreaMode next() {
         return VALUES[(ordinal() + 1) % VALUES.length];
     }

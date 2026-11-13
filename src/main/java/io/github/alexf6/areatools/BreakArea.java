@@ -10,30 +10,25 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 
-/** Lógica compartida entre servidor (romper) y cliente (contorno) para el área de la herramienta. */
+/**
+ * Adaptador a Minecraft, compartido entre servidor (romper) y cliente (contorno): convierte la geometría pura de
+ * {@link AreaGeometry} en posiciones del mundo y decide qué bloque vecino puede romper un jugador.
+ */
 public final class BreakArea {
 
     /**
-     * Posiciones del área alrededor de {@code center}, sin incluirlo: un cuadrado perpendicular a la cara
-     * golpeada que se extiende {@code shape.depth()} bloques hacia dentro. Cuesta O(volumen) y no depende del mundo.
+     * Posiciones del área alrededor de {@code center}, sin incluirlo; la forma sale de {@link AreaGeometry}.
+     * Cuesta O(volumen) y no depende del mundo.
      */
     public static List<BlockPos> neighbours(BlockPos center, Direction face, AreaShape shape) {
-        int radius = shape.radius();
-        int depthStep = -face.getAxisDirection().getStep(); // hacia dentro del bloque golpeado
-        List<BlockPos> result = new ArrayList<>(shape.volume() - 1);
-
-        for (int d = 0; d < shape.depth(); d++) {
-            for (int a = -radius; a <= radius; a++) {
-                for (int b = -radius; b <= radius; b++) {
-                    if (d == 0 && a == 0 && b == 0) continue;
-                    result.add(switch (face.getAxis()) {
-                        case X -> center.offset(d * depthStep, a, b);
-                        case Y -> center.offset(a, d * depthStep, b);
-                        case Z -> center.offset(a, b, d * depthStep);
-                    });
-                }
-            }
-        }
+        AreaGeometry.Axis axis = switch (face.getAxis()) {
+            case X -> AreaGeometry.Axis.X;
+            case Y -> AreaGeometry.Axis.Y;
+            case Z -> AreaGeometry.Axis.Z;
+        };
+        List<AreaGeometry.Offset> offsets = AreaGeometry.neighbours(axis, face.getAxisDirection().getStep(), shape);
+        List<BlockPos> result = new ArrayList<>(offsets.size());
+        for (AreaGeometry.Offset o : offsets) result.add(center.offset(o.dx(), o.dy(), o.dz()));
         return result;
     }
 

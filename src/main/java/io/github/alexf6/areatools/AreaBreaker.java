@@ -31,7 +31,7 @@ public final class AreaBreaker {
     public void breakArea(ServerPlayer player, Level level, BlockPos center, Direction face, ItemStack tool,
                           ToolKind kind, AreaToolsConfig config) {
         AreaMode mode = tool.getOrDefault(ModComponents.AREA_MODE, AreaMode.FLAT);
-        AreaShape shape = AreaShape.of(mode, config);
+        AreaShape shape = mode.shape(config);
 
         active = true;
         currentLevel = level;

@@ -159,9 +159,9 @@ class AreaToolsConfigTest {
     void shapeFollowsTheMode() {
         AreaToolsConfig config = new AreaToolsConfig(1, 2, 4, 70.0F, 2, true);
 
-        assertEquals(new AreaShape(1, 1), AreaShape.of(AreaMode.FLAT, config));
-        assertEquals(new AreaShape(2, 1), AreaShape.of(AreaMode.WIDE, config));
-        assertEquals(new AreaShape(1, 4), AreaShape.of(AreaMode.DEEP, config));
+        assertEquals(new AreaShape(1, 1), AreaMode.FLAT.shape(config));
+        assertEquals(new AreaShape(2, 1), AreaMode.WIDE.shape(config));
+        assertEquals(new AreaShape(1, 4), AreaMode.DEEP.shape(config));
     }
 
     @Test
