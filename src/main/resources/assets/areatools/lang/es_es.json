@@ -14,9 +14,12 @@
 	"areatools.mode.wide": "Ancho",
 	"areatools.mode.deep": "Profundo",
 	"advancements.areatools.hammer.title": "Golpe pesado",
-	"advancements.areatools.hammer.description": "Consigue un martillo, que mina un área de 3x3",
+	"advancements.areatools.hammer.description": "Consigue un martillo, que mina un área de bloques",
 	"advancements.areatools.excavator.title": "A cavar hondo",
 	"advancements.areatools.excavator.description": "Consigue un excavador, la versión pala del martillo",
 	"advancements.areatools.netherite_hammer.title": "Machácalo todo",
-	"advancements.areatools.netherite_hammer.description": "Consigue un martillo de netherita"
+	"advancements.areatools.netherite_hammer.description": "Consigue un martillo de netherita",
+	"advancements.areatools.netherite_excavator.title": "Excávalo todo",
+	"advancements.areatools.netherite_excavator.description": "Consigue un excavador de netherita",
+	"modmenu.descriptionTranslation.areatools": "Martillos y excavadores de cinco materiales que rompen bloques en área, con modos plano, ancho y profundo: agáchate y haz clic derecho para cambiar de modo. Los tamaños se configuran en config/areatools.json."
 }

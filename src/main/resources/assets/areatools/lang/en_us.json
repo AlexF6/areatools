@@ -14,9 +14,12 @@
 	"areatools.mode.wide": "Wide",
 	"areatools.mode.deep": "Deep",
 	"advancements.areatools.hammer.title": "Heavy Hitter",
-	"advancements.areatools.hammer.description": "Obtain a hammer, which mines a 3x3 area",
+	"advancements.areatools.hammer.description": "Obtain a hammer, which mines an area of blocks",
 	"advancements.areatools.excavator.title": "Dig Deep",
 	"advancements.areatools.excavator.description": "Obtain an excavator, the shovel version of the hammer",
 	"advancements.areatools.netherite_hammer.title": "Smash Everything",
-	"advancements.areatools.netherite_hammer.description": "Obtain a Netherite Hammer"
+	"advancements.areatools.netherite_hammer.description": "Obtain a Netherite Hammer",
+	"advancements.areatools.netherite_excavator.title": "Excavate Everything",
+	"advancements.areatools.netherite_excavator.description": "Obtain a Netherite Excavator",
+	"modmenu.descriptionTranslation.areatools": "Hammers and excavators across five materials that break blocks in an area, with flat, wide and deep modes: sneak and right-click to cycle modes. Sizes are configurable in config/areatools.json."
 }
