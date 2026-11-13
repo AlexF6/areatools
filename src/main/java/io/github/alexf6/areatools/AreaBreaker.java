@@ -3,6 +3,8 @@ package io.github.alexf6.areatools;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.jspecify.annotations.Nullable;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
@@ -19,22 +21,20 @@ import net.minecraft.world.phys.Vec3;
 public final class AreaBreaker {
 
     private final List<ItemEntity> spawnedDrops = new ArrayList<>();
-    private Level currentLevel;
-    private boolean active;
+    private @Nullable Level activeLevel; // el mundo en el que se rompe el área; null = no se está rompiendo nada
 
     /** Verdadero mientras se rompen los vecinos: cada uno vuelve a disparar el evento de romper bloque. */
     public boolean isActive() {
-        return active;
+        return activeLevel != null;
     }
 
-    /** Rompe los vecinos de {@code center}; el central lo rompe el juego a continuación. */
+    /** Rompe los vecinos de {@code center}; el central ya está roto cuando se llama (ver {@link AreaToolsHandler}). */
     public void breakArea(ServerPlayer player, Level level, BlockPos center, Direction face, ItemStack tool,
                           ToolKind kind, AreaToolsConfig config) {
         AreaMode mode = tool.getOrDefault(ModComponents.AREA_MODE, AreaMode.FLAT);
         AreaShape shape = mode.shape(config);
 
-        active = true;
-        currentLevel = level;
+        activeLevel = level;
         try {
             int broken = 0;
             for (BlockPos target : BreakArea.neighbours(center, face, shape)) {
@@ -55,22 +55,21 @@ public final class AreaBreaker {
                 gatherDrops(center, Math.max(shape.radius(), shape.depth()) + 1.5);
             }
         } finally {
-            active = false;
-            currentLevel = null;
+            activeLevel = null;
             spawnedDrops.clear();
         }
     }
 
     /** Anota los ítems que aparecen mientras se rompe el área, filtrando por mundo. */
     public void onEntityLoad(Entity entity) {
-        if (active && entity instanceof ItemEntity item && entity.level() == currentLevel) {
+        if (activeLevel != null && entity instanceof ItemEntity item && entity.level() == activeLevel) {
             spawnedDrops.add(item);
         }
     }
 
     /**
-     * Junta los drops en el bloque central si están cerca del área minada. Aún no ha pasado ningún tick,
-     * así que ese bloque ya estará roto cuando los ítems se muevan por primera vez.
+     * Junta los drops en el bloque central (ya roto) si están cerca del área minada. Aún no ha pasado ningún tick,
+     * así que los ítems no se han movido de donde aparecieron.
      */
     private void gatherDrops(BlockPos center, double maxDistance) {
         Vec3 middle = Vec3.atCenterOf(center);
